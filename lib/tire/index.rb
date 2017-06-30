@@ -34,11 +34,11 @@ module Tire
 
     def create(options={})
       @options = options
-      @response = Configuration.client.post url, MultiJson.encode(options)
+      @response = Configuration.client.put url, MultiJson.encode(options)
       @response.success? ? @response : false
 
     ensure
-      curl = %Q|curl -X POST #{url} -d '#{MultiJson.encode(options, :pretty => Configuration.pretty)}'|
+      curl = %Q|curl -X PUT #{url} -d '#{MultiJson.encode(options, :pretty => Configuration.pretty)}'|
       logged('CREATE', curl)
     end
 
